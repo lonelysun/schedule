@@ -1,0 +1,169 @@
+# -*- coding: utf-8 -*-
+<!DOCTYPE html>
+<html ng-app="myCalendarApp" id="top">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>Dashboard with Off-canvas Sidebar</title>
+		<meta name="generator" content="Bootply" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+        <!--&lt;!&ndash;need change source&ndash;&gt;-->
+        <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+
+
+        <link href="/born_schedule/static/bootply/css/bootstrap.min.css" rel="stylesheet">
+		<!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link href="/born_schedule/static/bootply/css/styles.css" rel="stylesheet">
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script src="/born_schedule/static/bootply/js/bootstrap.min.js"></script>
+		<script src="/born_schedule/static/bootply/js/scripts.js"></script>
+
+        <!--add later-->
+        <link rel='stylesheet' href='/born_schedule/static/bower_components-angular/fullcalendar/dist/fullcalendar.css' />
+        <script src='/born_schedule/static/bower_components-angular/jquery/dist/jquery.min.js'></script>
+        <script src='/born_schedule/static/bower_components-angular/jquery-ui.custom.min.js'></script>
+        <script src='/born_schedule/static/bower_components-angular/moment/min/moment.min.js'></script>
+        <script src='/born_schedule/static/bower_components-angular/angular/angular.js'></script>
+        <script src="/born_schedule/static/bower_components-angular/angular-ui-calendar/src/calendar.js"></script>
+        <script src='/born_schedule/static/bower_components/fullcalendar/dist/fullcalendar.js'></script>
+        <script  src="/born_schedule/static/bower_components/fullcalendar/dist/gcal.js"></script>
+
+
+        <!--<script type="text/javascript" src="/born_schedule/static/app.js"></script>-->
+        <script type="text/javascript" src="/born_schedule/static/controller.js"></script>
+        <!--end add-->
+
+
+        <link href="/born_schedule/static/born_schedule.css" rel="stylesheet">
+
+	</head>
+	<body ng-controller="CalendarCtrl">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">波恩排班</a>
+                </div>
+              </div>
+        </nav>
+
+<div class="container-fluid">
+
+      <div class="row row-offcanvas row-offcanvas-left">
+
+         <!--<div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">-->
+
+            <!--<ul class="nav nav-sidebar">-->
+              <!--<li class="active"><a href="#">排班管理</a></li>-->
+              <!--<li><a href="#">人员信息</a></li>-->
+              <!--<li><a href="#">人员分组</a></li>-->
+              <!--<li><a href="#">排班设置</a></li>-->
+            <!--</ul>-->
+
+        <!--</div>&lt;!&ndash;/span&ndash;&gt;-->
+
+        <!--<div class="col-sm-9 col-md-10 main">-->
+
+          <!--toggle sidebar button-->
+          <p class="visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
+          </p>
+
+		  <h1 class="page-header">
+            排班管理
+          </h1>
+
+
+            <div>
+                <h4 class="sub-header">可选班表</h4>
+                <div >
+                     <div id='external-events'>
+                        <div class='fc-event' ng-repeat="shift in shift_list" data-event='{"title":"{{shift.name}} {{shift.shift_range}}","stick":"true","shiftId":"{{shift.id}}"}' nisen-d >{{shift.name}} {{shift.shift_range}}
+                            <div class="hideDiv" style="display:none;background-color:red">move</div>
+                        </div>
+
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+            <hr>
+
+
+            <div class="submit">
+                <span><button ng-click="submit2()">开始编辑</button></span>
+            </div>
+            <div class="submit">
+                <span><button ng-click="submit2()">结束编辑</button></span>
+            </div>
+            <h4 class="sub-header">排班情况</h4>
+            <div>
+
+
+            <div class="calendar-header">
+                <div class="button">
+                    <span><button class="" ng-click="prev()">上周</button></span>
+
+                    <span><button class="" ng-click="next()">下周</button></span>
+                </div>
+            </div>
+
+                <div>本周 : {{head}}</div>
+
+
+
+              <div nisen-i>
+                <table class="bs-table">
+                    <tr class="generate-week">
+                        <td> </td>
+                        <td>
+                            <table class="inner-table">
+                                <tr>
+                                    <th ng-repeat="day in dayList">
+                                        <div>{{day.name}}</div>
+                                        <div>{{day.date}}</div>
+                                    </th>
+                                    <!--<th><div>周一</div><div>{{dateOfMon}}</div></th>-->
+                                    <!--<th><div>周二</div><div>{{dateOfTue}}</div></th>-->
+                                    <!--<th><div>周三</div><div>{{dateOfWed}}</div></th>-->
+                                    <!--<th><div>周四</div><div>{{dateOfThu}}</div></th>-->
+                                    <!--<th><div>周五</div><div>{{dateOfFri}}</div></th>-->
+                                    <!--<th><div>周六</div><div>{{dateOfSat}}</div></th>-->
+                                    <!--<th><div>周日</div><div>{{dateOfSun}}</div></th>-->
+
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="employee in employee_list">
+                        <td>{{employee.name}}</td>
+                        <td><div id="calendar_{{employee.id}}" class="coolcalendar" ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar" ></div></td>
+                    </tr>
+
+                </table>
+            </div>
+
+          <!--</div>-->
+
+
+      </div><!--/row-->
+	</div>
+</div><!--/.container-->
+
+<footer>
+  <p class="pull-right">©2015 Born</p>
+</footer>
+
+	<!-- script references -->
+
+	</body>
+</html>

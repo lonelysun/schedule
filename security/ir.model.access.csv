@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_born_schedule_shift_sale,table.use.line all,born_schedule.model_born_schedule_shift,base.group_system,1,1,0,0
+access_born_schedule_shift_user,table.use.line user,born_schedule.model_born_schedule_shift,base.group_user,1,0,0,0
+access_born_schedule_shift_manager,table.use.line manager,born_schedule.model_born_schedule_shift,base.group_erp_manager,1,1,1,1
+access_born_schedule_sale,table.use.line all,born_schedule.model_born_schedule,base.group_system,1,1,0,0
+access_born_schedule_user,table.use.line user,born_schedule.model_born_schedule,base.group_user,1,0,0,0
+access_born_schedule_manager,table.use.line manager,born_schedule.model_born_schedule,base.group_erp_manager,1,1,1,1
+
+

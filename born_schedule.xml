@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="form_view_born_schedule_shift" model="ir.ui.view">
+           	<field name="name">form_view_born_schedule_shift</field>
+   			<field name="model">born.schedule.shift</field>
+    		<field name="arch" type="xml">
+                <form string="班次表" >
+                 <sheet>
+                     <div class="oe_right oe_button_box" style="width: 450px;" name="buttons"></div>
+                     <div class="oe_title oe_left">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                     </div>
+                     <group>
+                         <group>
+	                         <field name="start_time" />
+	                         <field name="end_time" />
+                         </group>
+                         <group>
+                             <field name="type" />
+                             <field name="working_time" readonly="1"/>
+                         </group>
+                     </group>
+                 </sheet>
+       		    </form>
+   		   </field>
+		</record>
+
+        <!-- 定义一个班次表的列表视图 -->
+        <record id="tree_view_born_schedule_shift" model="ir.ui.view">
+            <field name="name">tree_view_born_schedule_shift</field>
+            <field name="model">born.schedule.shift</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="班次列表">
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="start_time"/>
+                    <field name="end_time"/>
+                    <field name="working_time"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--签到记录 born.checkin Action -->
+        <record id="action_born_schedule_shift" model="ir.actions.act_window">
+            <field name="name">班次</field>
+            <field name="res_model">born.schedule.shift</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_view_born_schedule_shift" />
+        </record>
+
+        <!--排班记录表单-->
+        <record id="form_view_born_schedule" model="ir.ui.view">
+           	<field name="name">form_view_born_schedule</field>
+   			<field name="model">born.schedule</field>
+    		<field name="arch" type="xml">
+                <form string="排班">
+                 <sheet>
+                     <div class="oe_right oe_button_box" style="width: 450px;" name="buttons"></div>
+                     <div class="oe_title oe_left">
+                        <h1>
+                            <field name="employee_id" options="{'no_open': True,'no_create': True}"/>
+                        </h1>
+                     </div>
+                     <group>
+                         <group>
+	                         <field name="date" />
+                         </group>
+                         <group>
+                            <field name="working_time_amount"></field>
+                         </group>
+                     </group>
+                     <notebook>
+                        <page string="排班">
+                            <field name="shift_id" >
+                                <tree>
+                                    <field name="name"></field>
+                                    <field name="type"></field>
+                                    <field name="start_time"></field>
+                                    <field name="end_time"></field>
+                                    <field name="working_time"></field>
+                                </tree>
+                            </field>
+                        </page>
+                     </notebook>
+                 </sheet>
+       		    </form>
+   		   </field>
+		</record>
+
+        <!-- 定义一个班次表的列表视图 -->
+        <record id="tree_view_born_schedule" model="ir.ui.view">
+            <field name="name">tree_view_born_schedule</field>
+            <field name="model">born.schedule</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="排班">
+                    <field name="employee_id"/>
+                    <field name="shift_id"/>
+                    <field name="date"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--签到记录 born.checkin Action -->
+        <record id="action_born_schedule" model="ir.actions.act_window">
+            <field name="name">排班</field>
+            <field name="res_model">born.schedule</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="tree_view_born_schedule" />
+        </record>
+
+
+
+        <!--菜单 -->
+        <!-- 人力资源顶级菜单 -->
+        <menuitem name="排班" id="menu_born_schedule_boot" parent="hr.menu_hr_root" sequence="99"/>
+        <menuitem name="班次" id="menu_born_schedule_shift" action="action_born_schedule_shift" parent="menu_born_schedule_boot" sequence="1"/>
+        <menuitem name="排班" id="menu_born_schedule" action="action_born_schedule" parent="menu_born_schedule_boot" sequence="2"/>
+    </data>
+</openerp>

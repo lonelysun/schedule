@@ -1,0 +1,40 @@
+/*add by nisen*/
+.submit {
+  float: right;
+}
+
+th {
+  text-align:center;
+}
+
+#external-events .fc-event {
+    width:100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    float: left;
+    margin: 2px;
+
+  }
+
+.calendar-header {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.inner-table{
+  table-layout: fixed;
+  width: 100%;
+  /*border:solid #add9c0; border-width:0px 0px 0px 1px*/
+}
+
+.bs-table{
+  border:solid #add9c0; border-width:1px 1px 1px 1px
+}
+.bs-table td {
+  border:solid #add9c0; border-width:0px 0px 1px 0px;
+}
+.fc td {
+    border-width: 0px 0px 0px 1px;
+}
+

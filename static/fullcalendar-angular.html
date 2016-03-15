@@ -1,0 +1,247 @@
+# -*- coding: utf-8 -*-
+<!DOCTYPE html>
+<html ng-app="myCalendarApp" id="top">
+	<head>
+		<title>Test for fullcanlendar with angular</title>
+		<meta charset="UTF-8">
+		<!--<meta http-equiv="X-UA-Compatible" content="IE=edge" />-->
+    	<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+
+        <!--Method 1-->
+        <link rel='stylesheet' href='/born_schedule/static/bower_components-angular/fullcalendar/dist/fullcalendar.css' />
+        <script src='/born_schedule/static/bower_components-angular/jquery/dist/jquery.min.js'></script>
+        <script src='/born_schedule/static/bower_components-angular/jquery-ui.custom.min.js'></script>
+        <script src='/born_schedule/static/bower_components-angular/moment/min/moment.min.js'></script>
+        <script src='/born_schedule/static/bower_components-angular/angular/angular.js'></script>
+        <script src="/born_schedule/static/bower_components-angular/angular-ui-calendar/src/calendar.js"></script>
+        <script src='/born_schedule/static/bower_components/fullcalendar/dist/fullcalendar.js'></script>
+        <script  src="/born_schedule/static/bower_components/fullcalendar/dist/gcal.js"></script>
+
+
+        <!--<script type="text/javascript" src="/born_schedule/static/app.js"></script>-->
+        <script type="text/javascript" src="/born_schedule/static/fullcalendar-angularController.js"></script>
+
+
+        <!--Drag-Drop-->
+
+		<style>
+			.fc-event {
+				width:100px;
+			}
+			/*.generate-week td span {*/
+				/*display:-moz-inline-box;*/
+				/*display:inline-block;*/
+				/*width:13%*/
+			/*}*/
+		</style>
+
+        <!--End Drag Drop-->
+
+
+
+    </head>
+    <body  ng-controller="CalendarCtrl">
+		<nav id="oe_main_menu_navbar" class="navbar navbar-inverse" role="navigation" >
+		<div class="navbar-collapse collapse" id="oe_main_menu_placeholder">
+            <ul class="nav navbar-nav navbar-left oe_application_menu_placeholder">
+                <li class="dropdown">
+                    <a href="/web" >返回</a>
+                </li>
+
+                {% if access.get('member_power',False) %}
+                <li class="dropdown">
+                    <a href="/report/report_member" >会员管理<b class="caret"></b></a>
+                    <ul id="menu_more" class="dropdown-menu">
+                    	<li style="display: block;">
+				            <a href="/report/report_member" class="oe_menu_toggler">
+				                <span class="oe_menu_text">会员资料分析表</span>
+				            </a>
+                		</li>
+                		<li style="display: block;">
+				            <a href="/report/report_card" class="oe_menu_toggler" >
+				                <span class="oe_menu_text">会员卡资料分析表</span>
+				            </a>
+                		</li>
+                		<li style="display: block;">
+				            <a href="/report/report_member_course" class="oe_menu_toggler" >
+				                <span class="oe_menu_text">会员卡疗程统计表</span>
+				            </a>
+                		</li>
+                		<li style="display: block;">
+				            <a href="/report/report_sign" class="oe_menu_toggler" >
+				                <span class="oe_menu_text">会员签到记录</span>
+				            </a>
+                		</li>
+                	</ul>
+                </li>
+                {% endif %}
+            </ul>
+		</div>
+	</nav>
+        <!--Aleart Message-->
+        <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
+            <h4>{{alertMessage}}</h4>
+        </div>
+
+
+		<div>
+			<div class="header">
+				This is Header
+			</div>
+			<div class="body">
+				<div class="main">
+					<div class="left">
+						<div id='external-events'>
+							<h4>Schedule Shifts</h4>
+							<div class='fc-event' ng-repeat="shift in shift_list" data-event='{"title":"{{shift.name}}","stick":"true","shiftId":"{{shift.id}}"}' nisen-d style="float:left;margin-right:10px">{{shift.name}}</div>
+						</div>
+					</div>
+					<div class="right">
+						<div class="calendar-header">
+							<div class="button">
+								<span><button ng-click="prev()">prev</button></span>
+								<span><button ng-click="next()">next</button></span>
+							</div>
+							<div class="submit">
+								<span><button ng-click="submit2()">Submit</button></span>
+							</div>
+						</div>
+
+						<div nisen-i>
+							<table>
+								<tr>
+									<th>Who</th>
+									<th>This Week : {{head}}</th>
+								</tr>
+								<tr class="generate-week">
+									<td>Name</td>
+									<td>
+										<table style="table-layout: fixed;width: 100%">
+											<tr>
+												<th>Mon</th>
+												<th>Tue</th>
+												<th>Wed</th>
+												<th>Thu</th>
+												<th>Fri</th>
+												<th>Sat</th>
+												<th>Sun</th>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr ng-repeat="employee in employee_list">
+									<td>{{employee.name}}</td>
+									<td><div id="calendar_{{employee.id}}" class="coolcalendar" ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar" ></div></td>
+								</tr>
+
+							</table>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+
+    </body>
+</html>
+
+
+
+         <!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>-->
+        <!--&lt;!&ndash;draggable jquery ui&ndash;&gt;-->
+        <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">-->
+        <!--<script src="//code.jquery.com/jquery-1.10.2.js"></script>-->
+        <!--<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>-->
+        <!--&lt;!&ndash;<link rel="stylesheet" href="/resources/demos/style.css">&ndash;&gt;-->
+
+        <!--<style>-->
+            <!--#draggable { width: 150px; height: 150px; padding: 0.5em; }-->
+        <!--</style>-->
+        <!--<script>-->
+          <!--$(function() {-->
+            <!--$( "#draggable" ).draggable();-->
+          <!--});-->
+        <!--</script>-->
+
+<!--<style>-->
+			<!--body {-->
+				<!--margin-top: 40px;-->
+				<!--text-align: center;-->
+				<!--font-size: 14px;-->
+				<!--font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;-->
+			<!--}-->
+
+			<!--#wrap {-->
+				<!--width: 1100px;-->
+				<!--margin: 0 auto;-->
+			<!--}-->
+
+			<!--#external-events {-->
+				<!--float: left;-->
+				<!--width: 150px;-->
+				<!--padding: 0 10px;-->
+				<!--border: 1px solid #ccc;-->
+				<!--background: #eee;-->
+				<!--text-align: left;-->
+			<!--}-->
+
+			<!--#external-events h4 {-->
+				<!--font-size: 16px;-->
+				<!--margin-top: 0;-->
+				<!--padding-top: 1em;-->
+			<!--}-->
+
+			<!--#external-events .fc-event {-->
+				<!--margin: 10px 0;-->
+				<!--cursor: pointer;-->
+			<!--}-->
+
+			<!--#external-events p {-->
+				<!--margin: 1.5em 0;-->
+				<!--font-size: 11px;-->
+				<!--color: #666;-->
+			<!--}-->
+
+			<!--#external-events p input {-->
+				<!--margin: 0;-->
+				<!--vertical-align: middle;-->
+			<!--}-->
+
+			<!--#calendar {-->
+				<!--float: right;-->
+				<!--width: 900px;-->
+			<!--}-->
+
+		<!--</style>-->
+
+<!--<script>-->
+
+			<!--$(document).ready(function() {-->
+
+				<!--/* initialize the external events-->
+				<!-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;*/-->
+
+				<!--$('#external-events .fc-event').each(function() {-->
+
+					<!--// store data so the calendar knows to render an event upon drop-->
+					<!--$(this).data('event', {-->
+						<!--title: $.trim($(this).text()), // use the element's text as the event title-->
+						<!--stick: true // maintain when user navigates (see docs on the renderEvent method)-->
+					<!--});-->
+
+					<!--// make the event draggable using jQuery UI-->
+					<!--$(this).draggable({-->
+						<!--zIndex: 999,-->
+						<!--revert: true,      // will cause the event to go back to its-->
+						<!--revertDuration: 0  //  original position after the drag-->
+					<!--});-->
+
+				<!--});-->
+
+			<!--});-->
+
+		<!--</script>-->
