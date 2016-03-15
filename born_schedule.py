@@ -67,7 +67,7 @@ class born_schedule(models.Model):
     employee_id=fields.Many2one('hr.employee',u'员工',required=True)
     shift_id=fields.Many2many('born.schedule.shift',string=u'班次')
     date=fields.Date(u'日期',required=True)
-    working_time_amount = fields.Float(compile='_get_amount',string=u'工作时间')
+    working_time_amount = fields.Float(compute='_get_amount',string=u'工作时间')
 
     @api.onchange('shift_id')
     def _get_amount(self):

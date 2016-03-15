@@ -71,7 +71,7 @@
 	                         <field name="date" />
                          </group>
                          <group>
-                            <field name="working_time_amount"></field>
+                            <field name="working_time_amount" readonly="1"></field>
                          </group>
                      </group>
                      <notebook>
@@ -101,6 +101,7 @@
                 <tree string="排班">
                     <field name="employee_id"/>
                     <field name="shift_id"/>
+                    <field name="working_time_amount"/>
                     <field name="date"/>
                 </tree>
             </field>
